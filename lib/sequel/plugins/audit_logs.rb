@@ -96,6 +96,8 @@ module Sequel
         end
 
         def commit_audit_log(event)
+          return unless Sequel::AuditLogs.enabled
+
           changes = audit_logs_values(event)
 
           add_audit_log(event:, changes:) unless changes.blank?
