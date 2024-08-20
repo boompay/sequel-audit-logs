@@ -11,7 +11,7 @@ module Sequel
       many_to_one :actor,     polymorphic: true
 
       def before_validation
-        self.actor = Sequel::AuditLogs.current_actor
+        self.actor ||= Sequel::AuditLogs.current_actor
 
         super
       end
